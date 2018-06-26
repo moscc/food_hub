@@ -9,39 +9,82 @@
       = image_tag 'foodhub1.png'
     %li
       %a
-        %input{:placeholder => "Search..", :type => "text"}/
-        %button{:type => "submit"}
+        %input{placeholder: "Search..", type: "text"}/
+        %button{type: "submit"}
           %i.fa.fa-search
 
-        = link_to 'Home', root_path
-        = link_to 'Chat', new_user_session_path
-        = link_to 'Quiz', user_facebook_omniauth_authorize_path
-        = link_to 'About', user_facebook_omniauth_authorize_path
+        = link_to "Home", root_path
+        |
+        - if user_signed_in?
+          = link_to "My Collection", collections_path
+          |
+          =link_to "My Profile", user_path(current_user)
+          |
+          = "Logged in as: #{current_user.email}"
+          |
+          = link_to 'Sign Out', destroy_user_session_path, method: :delete
+        - else
+          %button{:onclick => "document.getElementById('id02').style.display='block'"} Sign Up
+          |
+          %button{:onclick => "document.getElementById('id01').style.display='block'"} Login
+
+          #id01.modal-login
+            %span.close{:onclick => "document.getElementById('id01').style.display='none'", :title => "Close Modal"} ×
+
+            %form.modal-content-login.animate{:action => "/action_page.php"}
+              .imgcontainer
+                %img.avatar= image_tag 'icon2.png'
+              .container
+                %label{:for => "uname"}
+                  %b Username
+                %input{:name => "uname", :placeholder => "Enter Username", :required => "", :type => "text"}/
+                %label{:for => "psw"}
+                  %b Password
+                %input{:name => "psw", :placeholder => "Enter Password", :required => "", :type => "password"}/
+                %button.loginbtn{:type => "submit"} Login
+                %label
+                  %input{:checked => "checked", :name => "remember", :type => "checkbox"}/
+                  Remember me
+              .container{:style => "background-color:#f1f1f1"}
+                %button.logincancelbtn{:onclick => "document.getElementById('id01').style.display='none'", :type => "button"} Cancel
+                %span.psw
+                  Forgot
+                  %a{:href => "#"} password?
+
+          #id02.modal-signup
+            %span.close{:onclick => "document.getElementById('id02').style.display='none'", :title => "Close Modal"} ×
+
+            %form.modal-content-signup.animate{:action => "/action_page2.php"}
+              .container
+                %h1 Sign Up
+                %br
+                %p Please fill in this form to create an account.
+                %hr
+                  %label{:for => "email"}
+                    %b Email
+                  %input{:name => "email", :placeholder => "Enter Email", :type => "text"}
+                    %label{:for => "psw"}
+                      %b Password
+                    %input{:name => "psw", :placeholder => "Enter Password", :type => "password"}
+                      %label{:for => "psw-repeat"}
+                        %b Repeat Password
+                      %input{:name => "psw-repeat", :placeholder => "Repeat Password", :type => "password"}
+                        %label
+                          %input{:checked => "checked", :name => "remember", :style => "margin-bottom:15px", :type => "checkbox"}
+                            Remember me
+                          %p
+                            By creating an account you agree to our
+                            = succeed "." do
+                              %a{:href => "#", :style => "color:dodgerblue"} Terms  Privacy
+                          .clearfix
+                            %button.cancelbtn{:onclick => "document.getElementById('id02').style.display='none'", :type => "button"} Cancel
+                            %button.signup{:type => "submit"} Sign Up
+
+
+
+
+
 
 
       %a.icon{:href => "javascript:void(0);", :onclick => "myFunction()"}
         %i.fa.fa-bars
-
-        
-.wrapper
-  .navbar.flex.items-center.mx-auto.p-6
-    = link_to "Home", root_path
-    |
-    - if user_signed_in?
-      = link_to "My Collection", collections_path
-      |
-      =link_to "My Profile", user_path(current_user)
-      |
-      = "Logged in as: #{current_user.email}"
-      |
-      = link_to 'Sign Out', destroy_user_session_path, method: :delete
-    - else
-      = link_to 'Sign Up', new_user_registration_path
-      |
-      = link_to 'Login', new_user_session_path
-      |
-      = link_to 'Login with Facebook', user_facebook_omniauth_authorize_path
-
-    = form_with url: search_recipes_path, method: :post, local: true do |form|
-      = form.text_field :search, placeholder: 'Search'
-      = form.submit 'Search'

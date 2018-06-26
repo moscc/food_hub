@@ -86,6 +86,14 @@ html, body {
     margin: auto;
     font-size: 17px;
 }
+/*
+  input {
+    size: 55%;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  */
 
   #landing {
     -webkit-background-size: cover;
@@ -112,11 +120,12 @@ html, body {
      float:right;
      font-weight: bold;
 
-     a {
+     a, button {
        font-family: "Gotham Black", "Avenir Next", "Avenir", "Arial";
        color: black;
-       padding: 20px;
+       padding: 10px;
        text-decoration: none;
+       border-radius: 8px;
 
        &:focus,
        &:hover {
@@ -126,6 +135,10 @@ html, body {
      }
     }
   }
+
+    button i {
+      color: white;
+    }
 
    .recipes {
       grid-area: projects;
@@ -180,5 +193,156 @@ html, body {
     float: none;
     display: block;
     text-align: left;
+  }
+}
+
+#id01.modal-login {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+form.modal-content-login {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 30%;
+}
+
+#id02.modal-signup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 50px;
+  opacity: 50%;
+}
+
+form.modal-content-signup {
+  background-color: #fefefe;
+  margin: auto;
+  width: 70%;
+}
+
+.logincancelbtn {
+  margin: 20px;
+  padding: 14px 20px;
+  background-color: #f44336;
+  width: 30%;
+}
+
+.loginbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cancelbtn, .signup {
+  float: left;
+  width: 30%;
+}
+
+.cancelbtn {
+  margin: 20px;
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+button.cancelbtn:hover {
+  background-color: #f18179;
+  color: #000;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)}
+    to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+* {box-sizing: border-box}
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.signup {
+  margin: 20px;
+  padding: 14px 20px;
+  background-color: #4CAF50;
+}
+.signup:hover {
+  background-color: #a3e7a6;
+  color: black;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container {
+  padding: 7%;
+}
+
+.imgcontainer {
+    padding-top: 5%;
+    margin: auto;
+    width: 40%;
+}
+
+.close {
+    /* Position it in the top right corner outside of the modal */
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signup {
+    width: 100%;
   }
 }
